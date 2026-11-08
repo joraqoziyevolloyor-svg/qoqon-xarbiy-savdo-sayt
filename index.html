@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qo'qon Xarbiy Savdo — harbiy anjomlar</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<meta name="description" content="Harbiy anjomlarning barcha turlari: kiyim, poyabzal, bosh kiyim, taktik jihozlar. Qo'qon savdo kompleksi bozori.">
+<style>
+:root{
+  --fon:#14170f; --fon2:#1d2116; --karta:#232819; --chiziq:#363d27;
+  --matn:#eceee4; --xira:#a7ad95; --asosiy:#b5c27a; --asosiy-q:#1b1f12;
+  --tugma:#6b7a3a; --tugma-h:#7d8e45; --tg:#2aa3e0;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--fon);color:var(--matn);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+a{color:inherit}
+img{display:block;max-width:100%}
+.ichki{max-width:1240px;margin:0 auto;padding:0 16px}
+
+header{background:linear-gradient(180deg,#232a17 0%,var(--fon) 100%);border-bottom:1px solid var(--chiziq)}
+.bosh{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding:22px 0 18px}
+.logo{display:flex;gap:12px;align-items:center}
+.belgi{width:46px;height:46px;border-radius:10px;background:var(--asosiy);color:var(--asosiy-q);display:grid;place-items:center;font-weight:800;font-size:20px;letter-spacing:-.5px}
+.logo h1{margin:0;font-size:22px;letter-spacing:.5px;text-transform:uppercase}
+.logo p{margin:2px 0 0;color:var(--xira);font-size:13px}
+.aloqa{display:flex;flex-wrap:wrap;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:1px solid var(--chiziq);background:var(--fon2);text-decoration:none;font-weight:600;font-size:14px;cursor:pointer;color:var(--matn)}
+.btn:hover{border-color:var(--asosiy)}
+.btn.asosiy{background:var(--tugma);border-color:var(--tugma)}
+.btn.asosiy:hover{background:var(--tugma-h)}
+.btn.tg{background:var(--tg);border-color:var(--tg);color:#fff}
+.btn svg{width:18px;height:18px;flex:none}
+
+.banner{padding:26px 0 8px}
+.banner h2{margin:0 0 6px;font-size:clamp(22px,4vw,34px)}
+.banner p{margin:0;color:var(--xira);max-width:720px}
+.manzil{margin-top:10px;color:var(--xira);font-size:14px}
+
+.boshqaruv{position:sticky;top:0;z-index:5;background:rgba(20,23,15,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--chiziq);padding:12px 0}
+.qidir{width:100%;padding:11px 14px;border-radius:10px;border:1px solid var(--chiziq);background:var(--fon2);color:var(--matn);font-size:15px}
+.turlar{display:flex;gap:8px;overflow-x:auto;padding-top:10px;scrollbar-width:none}
+.turlar::-webkit-scrollbar{display:none}
+.tur{flex:none;padding:7px 13px;border-radius:999px;border:1px solid var(--chiziq);background:transparent;color:var(--xira);font-size:14px;cursor:pointer;white-space:nowrap}
+.tur.faol{background:var(--asosiy);border-color:var(--asosiy);color:var(--asosiy-q);font-weight:700}
+
+.son{color:var(--xira);font-size:14px;margin:16px 0 10px}
+.tor{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;padding-bottom:40px}
+@media(max-width:520px){.tor{grid-template-columns:repeat(2,1fr);gap:10px}}
+.karta{background:var(--karta);border:1px solid var(--chiziq);border-radius:12px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:transform .15s,border-color .15s}
+.karta:hover{transform:translateY(-2px);border-color:var(--asosiy)}
+.karta .rasm{aspect-ratio:1/1;background:#fff;position:relative}
+.karta .rasm{overflow:hidden}
+.karta .rasm img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.yorliq{position:absolute;left:8px;top:8px;background:rgba(20,23,15,.85);color:var(--matn);font-size:12px;padding:3px 8px;border-radius:6px}
+.yorliq.v{left:auto;right:8px}
+.karta .mal{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
+.karta h3{margin:0;font-size:15px;line-height:1.3}
+.karta .turi{color:var(--xira);font-size:12px}
+.narx{margin-top:auto;color:var(--asosiy);font-weight:700;font-size:14px}
+
+.oyna{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;z-index:20;padding:16px}
+.oyna.ochiq{display:flex}
+.quti{background:var(--fon2);border:1px solid var(--chiziq);border-radius:14px;max-width:980px;width:100%;max-height:calc(100vh - 32px);overflow:auto;display:grid;grid-template-columns:1.2fr 1fr}
+@media(max-width:760px){.quti{grid-template-columns:1fr}}
+.galereya{background:#fff;position:relative}
+.galereya .katta{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff}
+.galereya video{width:100%;aspect-ratio:1/1;background:#000}
+.kichiklar{display:flex;gap:6px;padding:8px;background:var(--fon2);overflow-x:auto}
+.kichiklar button{flex:none;width:62px;height:62px;padding:0;border:2px solid transparent;border-radius:8px;overflow:hidden;background:#fff;cursor:pointer;position:relative}
+.kichiklar button.faol{border-color:var(--asosiy)}
+.kichiklar img{width:100%;height:100%;object-fit:cover}
+.kichiklar .play{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.45);color:#fff;font-size:22px}
+.tafsil{padding:20px;display:flex;flex-direction:column;gap:12px}
+.tafsil h2{margin:0;font-size:22px}
+.tafsil .izoh{color:var(--xira);margin:0}
+.tafsil .narx{font-size:18px}
+.raqam{background:var(--karta);border:1px dashed var(--chiziq);border-radius:10px;padding:10px 12px;font-size:14px;color:var(--xira)}
+.raqam b{color:var(--matn)}
+.tugmalar{display:flex;flex-direction:column;gap:8px}
+.tugmalar .btn{justify-content:center;padding:12px}
+.yop{position:sticky;top:0;margin-left:auto;background:none;border:none;color:var(--xira);font-size:28px;cursor:pointer;line-height:1;padding:0 4px}
+.sarlavha{display:flex;align-items:flex-start;gap:8px}
+
+footer{border-top:1px solid var(--chiziq);padding:24px 0 34px;color:var(--xira);font-size:14px}
+footer .aloqa{margin-top:10px}
+.bosh-yoq{padding:40px 0;text-align:center;color:var(--xira)}
+</style>
+</head>
+<body>
+<header>
+  <div class="ichki">
+    <div class="bosh">
+      <div class="logo">
+        <div class="belgi">QX</div>
+        <div><h1>Qo'qon Xarbiy Savdo</h1><p>Harbiy anjomlar do'koni</p></div>
+      </div>
+      <div class="aloqa">
+        <a class="btn tg" href="https://t.me/Farruxbeksodiqjonovich" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.8 15.3l-.4 4.2c.6 0 .8-.3 1.1-.6l2.7-2.5 5.5 4c1 .6 1.7.3 2-.9l3.6-16.9c.3-1.4-.5-2-1.5-1.6L1.6 9.4c-1.4.6-1.4 1.4-.2 1.7l5.4 1.7 12.5-7.9c.6-.4 1.1-.2.7.2"/></svg>Telegramda yozish</a>
+        <a class="btn asosiy" href="tel:+998911544181"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>+998 91 154 41 81</a>
+      </div>
+    </div>
+    <div class="banner">
+      <h2>Harbiy anjomlarning barcha turlari</h2>
+      <p>Kiyim, poyabzal, bosh kiyim, taktik jihozlar, g'iloflar, nishonlar, fonarlar. Narxi va o'lchami bo'yicha Telegram yoki telefon orqali murojaat qiling.</p>
+      <div class="manzil">📍 «Qo'qon savdo kompleksi» bozori · Telegram kanal: <a href="https://t.me/qoqonharbiysavdo" target="_blank" rel="noopener">@qoqonharbiysavdo</a></div>
+    </div>
+  </div>
+</header>
+
+<div class="boshqaruv">
+  <div class="ichki">
+    <input class="qidir" id="qidir" type="search" placeholder="Mahsulot qidirish…" autocomplete="off">
+    <div class="turlar" id="turlar"></div>
+  </div>
+</div>
+
+<main class="ichki">
+  <div class="son" id="son"></div>
+  <div class="tor" id="tor"></div>
+</main>
+
+<footer>
+  <div class="ichki">
+    <b style="color:var(--matn)">Qo'qon Xarbiy Savdo</b><br>
+    📍 «Qo'qon savdo kompleksi» bozori<br>
+    Barcha savollar bo'yicha: Telegram @Farruxbeksodiqjonovich · +998 91 154 41 81
+    <div class="aloqa">
+      <a class="btn tg" href="https://t.me/Farruxbeksodiqjonovich" target="_blank" rel="noopener">Telegramda yozish</a>
+      <a class="btn" href="https://t.me/qoqonharbiysavdo" target="_blank" rel="noopener">Telegram kanal</a>
+      <a class="btn asosiy" href="tel:+998911544181">Qo'ng'iroq qilish</a>
+    </div>
+  </div>
+</footer>
+
+<div class="oyna" id="oyna" role="dialog" aria-modal="true">
+  <div class="quti" id="quti"></div>
+</div>
+
+<script>
+const M = [{"n": 1, "nom": "Kamuflyaj forma (ko'ylak + shim)", "tur": "Kiyim", "izoh": "", "rasm": ["3386", "3384", "3385"], "video": []}, {"n": 2, "nom": "Yashil xizmat ko'ylagi", "tur": "Kiyim", "izoh": "", "rasm": ["3387"], "video": []}, {"n": 3, "nom": "Flis balaklava (bosh va bo'yin uchun)", "tur": "Bosh kiyim", "izoh": "Ranglar: qum rang, yashil, qora", "rasm": ["3389", "3388", "3390"], "video": []}, {"n": 4, "nom": "Taktik ryukzak", "tur": "Taktik jihozlar", "izoh": "Ranglar: yashil, kamuflyaj, qora", "rasm": ["3392", "3391", "3393"], "video": []}, {"n": 5, "nom": "Panama", "tur": "Bosh kiyim", "izoh": "2 xil kamuflyaj", "rasm": ["3394", "3395"], "video": []}, {"n": 6, "nom": "Charm to'pponcha g'ilofi", "tur": "G'iloflar", "izoh": "", "rasm": ["3396"], "video": []}, {"n": 7, "nom": "Charm osma ushlagich", "tur": "G'iloflar", "izoh": "", "rasm": ["3397"], "video": []}, {"n": 8, "nom": "Termo ichki kiyim (to'plam)", "tur": "Kiyim", "izoh": "Ranglar: yashil, qora, kamuflyaj", "rasm": ["3398", "3399", "3400", "3401"], "video": []}, {"n": 9, "nom": "Signal chiroq (qizil-ko'k)", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3403"], "video": ["3435"]}, {"n": 10, "nom": "Plastik to'pponcha g'ilofi", "tur": "G'iloflar", "izoh": "", "rasm": ["3412", "3404", "3405"], "video": []}, {"n": 11, "nom": "Harbiy xizmat nishoni medali (qutida)", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3406", "3407"], "video": []}, {"n": 12, "nom": "Taktik bolta", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3408"], "video": []}, {"n": 13, "nom": "Kuchli fonar (zaryadlanadigan)", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3409"], "video": []}, {"n": 14, "nom": "Oq qo'lqop", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3410"], "video": []}, {"n": 15, "nom": "Yorug'lik tayoqchalari", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3411"], "video": []}, {"n": 16, "nom": "Multitul-bolta (g'ilofli)", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3413"], "video": []}, {"n": 17, "nom": "Charm kalit qopchasi", "tur": "Nishon va aksessuarlar", "izoh": "Ranglar: qora, jigarrang", "rasm": ["3415", "3416"], "video": ["3414"]}, {"n": 18, "nom": "Guvohnoma muqovasi (charm)", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3419"], "video": ["3418"]}, {"n": 19, "nom": "Aptechka sumkasi", "tur": "Taktik jihozlar", "izoh": "", "rasm": ["3421"], "video": []}, {"n": 20, "nom": "Plitonoska (multicam)", "tur": "Taktik jihozlar", "izoh": "", "rasm": ["3426", "3427", "3422", "3423"], "video": ["3420"]}, {"n": 21, "nom": "Magazin cho'ntaklari", "tur": "Taktik jihozlar", "izoh": "", "rasm": ["3424"], "video": []}, {"n": 22, "nom": "Shevronlar to'plami", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3433"], "video": []}, {"n": 23, "nom": "Kurvimetr / kompas (qutida)", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3434"], "video": []}, {"n": 24, "nom": "Plastik karabin", "tur": "Taktik jihozlar", "izoh": "", "rasm": ["3436"], "video": []}, {"n": 25, "nom": "Bilakka taqiladigan kompas", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3437"], "video": []}, {"n": 26, "nom": "Paxtali shim", "tur": "Kiyim", "izoh": "", "rasm": ["3438"], "video": []}, {"n": 27, "nom": "Harbiy kotelok", "tur": "Taktik jihozlar", "izoh": "", "rasm": ["3440"], "video": []}, {"n": 28, "nom": "Bel sumkasi", "tur": "Taktik jihozlar", "izoh": "4 xil rang", "rasm": ["3441"], "video": []}, {"n": 29, "nom": "Dumaloq shevron", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3443"], "video": []}, {"n": 30, "nom": "Sport termo kiyim (qora / yashil)", "tur": "Kiyim", "izoh": "", "rasm": ["3444", "3445"], "video": ["3446"]}, {"n": 31, "nom": "Termo ichki kiyim (qishki)", "tur": "Kiyim", "izoh": "", "rasm": ["3447"], "video": []}, {"n": 32, "nom": "Trikotaj shapka", "tur": "Bosh kiyim", "izoh": "5 xil rang", "rasm": ["3449"], "video": []}, {"n": 33, "nom": "Qora baland botinka", "tur": "Poyabzal", "izoh": "", "rasm": ["3450", "3451"], "video": []}, {"n": 34, "nom": "Krossovka (qora)", "tur": "Poyabzal", "izoh": "", "rasm": ["3452"], "video": []}, {"n": 35, "nom": "Flis kurtka (yashil + kamuflyaj)", "tur": "Kiyim", "izoh": "", "rasm": ["3453"], "video": []}, {"n": 36, "nom": "Flis kurtka (raqamli kamuflyaj)", "tur": "Kiyim", "izoh": "", "rasm": ["3454"], "video": []}, {"n": 37, "nom": "Softshell kostyum (kapyushonli)", "tur": "Kiyim", "izoh": "Kanalda: «Qora Yashil ranglar bor». Rasmlarda: qora, yashil, kamuflyaj, qum rang, kulrang", "rasm": ["3477", "3478", "3476", "3503", "3501", "3502", "3504", "3455"], "video": []}, {"n": 38, "nom": "Qishki kurtka (qora)", "tur": "Kiyim", "izoh": "", "rasm": ["3456"], "video": []}, {"n": 39, "nom": "Flis kurtka (yashil)", "tur": "Kiyim", "izoh": "", "rasm": ["3457"], "video": []}, {"n": 40, "nom": "Kamuflyaj plash", "tur": "Kiyim", "izoh": "", "rasm": ["3458"], "video": []}, {"n": 41, "nom": "Qora arqon", "tur": "Taktik jihozlar", "izoh": "", "rasm": ["3459", "3460"], "video": []}, {"n": 42, "nom": "Softshell kurtka", "tur": "Kiyim", "izoh": "Ranglar: yashil, qora, qora kamuflyaj, kamuflyaj", "rasm": ["3461", "3462", "3463", "3464"], "video": ["3432"]}, {"n": 43, "nom": "Shovqindan himoya quloqchini", "tur": "Fonar va asboblar", "izoh": "Ranglar: qum rang, yashil, qora", "rasm": ["3466", "3465", "3467"], "video": []}, {"n": 44, "nom": "Multicam kitel + shim", "tur": "Kiyim", "izoh": "", "rasm": ["3468"], "video": []}, {"n": 45, "nom": "Multicam qishki kurtka (kapyushonli)", "tur": "Kiyim", "izoh": "", "rasm": ["3473"], "video": []}, {"n": 46, "nom": "Multicam yozgi kostyum", "tur": "Kiyim", "izoh": "", "rasm": ["3471"], "video": []}, {"n": 47, "nom": "Qishki kostyum (yashil / multicam)", "tur": "Kiyim", "izoh": "", "rasm": ["3474", "3475"], "video": []}, {"n": 48, "nom": "Signal jilet", "tur": "Kiyim", "izoh": "", "rasm": ["3479"], "video": []}, {"n": 49, "nom": "Tantanali kamar", "tur": "Kamarlar", "izoh": "", "rasm": ["3480"], "video": []}, {"n": 50, "nom": "LED yo'l harakati tayoqchasi", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3481", "3482"], "video": []}, {"n": 51, "nom": "Qora taktik kamar", "tur": "Kamarlar", "izoh": "", "rasm": ["3483"], "video": []}, {"n": 52, "nom": "Taktik kamar", "tur": "Kamarlar", "izoh": "Ranglar: yashil, qora, to'q sariq", "rasm": ["3487", "3484"], "video": []}, {"n": 53, "nom": "Maxsus ish kiyimi", "tur": "Kiyim", "izoh": "", "rasm": ["3486"], "video": []}, {"n": 54, "nom": "Kaska chexoli", "tur": "Bosh kiyim", "izoh": "", "rasm": ["3488"], "video": []}, {"n": 55, "nom": "Yulduzli nishon", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3494", "3495"], "video": []}, {"n": 56, "nom": "Harbiy sportchi va desantchi nishonlari", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3496"], "video": []}, {"n": 57, "nom": "Qilichli nishon", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3497"], "video": []}, {"n": 58, "nom": "Tilla rang tugmalar", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3498"], "video": []}, {"n": 59, "nom": "Klass nishonlari (M, 1, 2, 3)", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3499"], "video": []}, {"n": 60, "nom": "Taktik botinka (qishki)", "tur": "Poyabzal", "izoh": "", "rasm": ["3500"], "video": ["3493"]}, {"n": 61, "nom": "Glock uchun g'ilof", "tur": "G'iloflar", "izoh": "Glock 17 va Glock 19 uchun", "rasm": ["3505", "3506", "3507"], "video": []}, {"n": 62, "nom": "Kamuflyaj to'qima kamar", "tur": "Kamarlar", "izoh": "", "rasm": ["k3402"], "video": ["3402"]}, {"n": 63, "nom": "Teleskopik fonar (ekranli)", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["k3429"], "video": ["3429"]}, {"n": 64, "nom": "Kemping fonari", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["k3430"], "video": ["3430"]}, {"n": 65, "nom": "Kichik fonar", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["k3431"], "video": ["3431"]}];
+const TURLAR = ["Hammasi","Kiyim","Poyabzal","Bosh kiyim","Taktik jihozlar","Kamarlar","G'iloflar","Nishon va aksessuarlar","Fonar va asboblar"];
+let tur = "Hammasi", soz = "";
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function turlarniChiz(){
+  $("#turlar").innerHTML = TURLAR.map(t => {
+    const n = t === "Hammasi" ? M.length : M.filter(m => m.tur === t).length;
+    return `<button class="tur${t===tur?' faol':''}" data-t="${esc(t)}">${esc(t)} · ${n}</button>`;
+  }).join("");
+}
+function chiz(){
+  const q = soz.trim().toLowerCase();
+  const r = M.filter(m => (tur === "Hammasi" || m.tur === tur) && (!q || (m.nom+" "+m.izoh+" "+m.tur).toLowerCase().includes(q)));
+  $("#son").textContent = `${r.length} ta mahsulot`;
+  $("#tor").innerHTML = r.length ? r.map(m => `
+    <div class="karta" data-n="${m.n}" tabindex="0">
+      <div class="rasm">
+        <img src="rasmlar/${m.rasm[0]}_k.jpg" alt="${esc(m.nom)}" loading="lazy">
+        ${m.rasm.length>1?`<span class="yorliq">${m.rasm.length} rasm</span>`:""}
+        ${m.video.length?`<span class="yorliq v">▶ video</span>`:""}
+      </div>
+      <div class="mal">
+        <span class="turi">${esc(m.tur)}</span>
+        <h3>${esc(m.nom)}</h3>
+        <span class="narx">Narxini so'rang</span>
+      </div>
+    </div>`).join("") : `<div class="bosh-yoq">Hech narsa topilmadi</div>`;
+}
+function och(n){
+  const m = M.find(x => x.n === n); if(!m) return;
+  const el = [...m.rasm.map(r => ({t:"r", r})), ...m.video.map(v => ({t:"v", v}))];
+  const ko = i => { const e = el[i];
+    $("#asosiy").innerHTML = e.t === "r"
+      ? `<img class="katta" src="rasmlar/${e.r}.jpg" alt="${esc(m.nom)}">`
+      : `<video src="video/${e.v}.mp4" controls autoplay playsinline preload="none"></video>`;
+    document.querySelectorAll(".kichiklar button").forEach((b,k) => b.classList.toggle("faol", k===i));
+  };
+  $("#quti").innerHTML = `
+    <div class="galereya">
+      <div id="asosiy"></div>
+      ${el.length>1?`<div class="kichiklar">${el.map((e,i)=> e.t==="r"
+        ? `<button data-i="${i}"><img src="rasmlar/${e.r}_k.jpg" alt=""></button>`
+        : `<button data-i="${i}"><img src="rasmlar/${m.rasm[0]}_k.jpg" alt=""><span class="play">▶</span></button>`).join("")}</div>`:""}
+    </div>
+    <div class="tafsil">
+      <div class="sarlavha"><h2>${esc(m.nom)}</h2><button class="yop" id="yop" aria-label="Yopish">×</button></div>
+      <span class="turi" style="color:var(--xira)">${esc(m.tur)}</span>
+      ${m.izoh?`<p class="izoh">${esc(m.izoh)}</p>`:""}
+      <div class="narx">Narxini so'rang</div>
+      <div class="raqam">Mahsulot raqami: <b>№${m.n}</b> — yozganingizda yoki qo'ng'iroq qilganingizda shu raqamni ayting.</div>
+      <div class="tugmalar">
+        <a class="btn tg" href="https://t.me/Farruxbeksodiqjonovich" target="_blank" rel="noopener">Telegramda buyurtma berish</a>
+        <a class="btn asosiy" href="tel:+998911544181">Qo'ng'iroq qilish: +998 91 154 41 81</a>
+      </div>
+      <div class="manzil" style="font-size:13px;color:var(--xira)">📍 «Qo'qon savdo kompleksi» bozori</div>
+    </div>`;
+  document.querySelectorAll(".kichiklar button").forEach(b => b.onclick = () => ko(+b.dataset.i));
+  ko(0);
+  $("#yop").onclick = yop;
+  $("#oyna").classList.add("ochiq");
+  if(TG) TG.BackButton.show();
+  document.body.style.overflow = "hidden";
+  history.replaceState(null, "", "#m" + n);
+}
+function yop(){
+  $("#oyna").classList.remove("ochiq"); $("#quti").innerHTML = "";
+  document.body.style.overflow = ""; history.replaceState(null, "", location.pathname);
+  if(TG) TG.BackButton.hide();
+}
+$("#turlar").onclick = e => { const b = e.target.closest(".tur"); if(!b) return; tur = b.dataset.t; turlarniChiz(); chiz(); };
+$("#qidir").oninput = e => { soz = e.target.value; chiz(); };
+$("#tor").onclick = e => { const k = e.target.closest(".karta"); if(k) och(+k.dataset.n); };
+$("#tor").onkeydown = e => { const k = e.target.closest(".karta"); if(k && e.key === "Enter") och(+k.dataset.n); };
+$("#oyna").onclick = e => { if(e.target.id === "oyna") yop(); };
+document.addEventListener("keydown", e => { if(e.key === "Escape") yop(); });
+// Telegram ichida (mini app) ochilganda: to'liq balandlik, rang, «orqaga» tugmasi, t.me havolalari Telegram ichida
+const TG = (window.Telegram && Telegram.WebApp && Telegram.WebApp.initData) ? Telegram.WebApp : null;
+if(TG){
+  TG.ready(); TG.expand();
+  try { TG.setHeaderColor("#14170f"); TG.setBackgroundColor("#14170f"); } catch(e) {}
+  TG.BackButton.onClick(yop);
+  document.addEventListener("click", e => {
+    const a = e.target.closest('a[href^="https://t.me/"]');
+    if(a){ e.preventDefault(); TG.openTelegramLink(a.href); }
+  });
+}
+turlarniChiz(); chiz();
+const h =location.hash.match(/^#m(\d+)$/); if(h) och(+h[1]);
+</script>
+</body>
+</html>
