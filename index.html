@@ -37,12 +37,18 @@ header{background:linear-gradient(180deg,#232a17 0%,var(--fon) 100%);border-bott
 .banner p{margin:0;color:var(--xira);max-width:720px}
 .manzil{margin-top:10px;color:var(--xira);font-size:14px}
 
-.boshqaruv{position:sticky;top:0;z-index:5;background:rgba(20,23,15,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--chiziq);padding:12px 0}
+.boshqaruv{background:var(--fon);border-bottom:1px solid var(--chiziq);padding:14px 0 16px}
 .qidir{width:100%;padding:11px 14px;border-radius:10px;border:1px solid var(--chiziq);background:var(--fon2);color:var(--matn);font-size:16px}
-.turlar{display:flex;gap:8px;overflow-x:auto;padding-top:10px;scrollbar-width:none}
+.turlar{display:grid;grid-template-columns:repeat(9,1fr);gap:10px;padding-top:14px}
+@media(max-width:900px){.turlar{grid-template-columns:repeat(5,1fr)}}
+@media(max-width:560px){.turlar{grid-template-columns:repeat(3,1fr);gap:8px}}
 .turlar::-webkit-scrollbar{display:none}
-.tur{flex:none;padding:7px 13px;border-radius:999px;border:1px solid var(--chiziq);background:transparent;color:var(--xira);font-size:14px;cursor:pointer;white-space:nowrap}
-.tur.faol{background:var(--asosiy);border-color:var(--asosiy);color:var(--asosiy-q);font-weight:700}
+.tur{display:flex;flex-direction:column;padding:0;border-radius:12px;border:2px solid var(--chiziq);background:var(--karta);color:var(--matn);cursor:pointer;overflow:hidden;text-align:center;min-width:0}
+.tur img{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff;display:block}
+.tur .tn{font-size:13px;font-weight:700;line-height:1.2;padding:7px 4px 2px}
+.tur .ts{font-size:12px;color:var(--xira);padding:0 4px 8px}
+.tur.faol{border-color:var(--asosiy);background:var(--asosiy);color:var(--asosiy-q)}
+.tur.faol .ts{color:var(--asosiy-q)}
 
 .son{color:var(--xira);font-size:14px;margin:16px 0 10px}
 .tor{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;padding-bottom:40px}
@@ -199,10 +205,13 @@ function savatga(n, olcham, soni){
   if(TG) try { TG.HapticFeedback.notificationOccurred("success"); } catch(e) {}
 }
 
+// Har bo'lim uchun rasm: shu bo'limdagi bitta mahsulotning muqovasi
+const TUR_RASM = {"Hammasi":3477,"Kiyim":3386,"Poyabzal":3450,"Bosh kiyim":3389,"Taktik jihozlar":3392,"Kamarlar":3487,"G'iloflar":3412,"Nishon va aksessuarlar":3499,"Fonar va asboblar":3409};
 function turlarniChiz(){
   $("#turlar").innerHTML = TURLAR.map(t => {
     const n = t === "Hammasi" ? M.length : M.filter(m => m.tur === t).length;
-    return `<button class="tur${t===tur?' faol':''}" data-t="${esc(t)}">${esc(t)} · ${n}</button>`;
+    return `<button class="tur${t===tur?' faol':''}" data-t="${esc(t)}" data-son="${n}">
+      <img src="rasmlar/${TUR_RASM[t]}_k.jpg" alt="" loading="lazy"><span class="tn">${esc(t)}</span><span class="ts">${n} ta</span></button>`;
   }).join("");
 }
 function chiz(){
@@ -360,7 +369,8 @@ function tgTugma(){
   else if(oyna !== "savat" && jami() > 0){ B.setText(`🛒 Savat · ${jami()} ta`); B.show(); }
   else B.hide();
 }
-$("#turlar").onclick = e => { const b = e.target.closest(".tur"); if(!b) return; tur = b.dataset.t; turlarniChiz(); chiz(); };
+$("#turlar").onclick = e => { const b = e.target.closest(".tur"); if(!b) return; tur = b.dataset.t; turlarniChiz(); chiz();
+  $("#son").scrollIntoView({behavior: "smooth", block: "start"}); };
 $("#qidir").oninput = e => { soz = e.target.value; chiz(); };
 $("#tor").onclick = e => { const k = e.target.closest(".karta"); if(k) och(+k.dataset.n); };
 $("#tor").onkeydown = e => { const k = e.target.closest(".karta"); if(k && e.key === "Enter") och(+k.dataset.n); };
