@@ -2,7 +2,7 @@
 <html lang="uz">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Qo'qon Xarbiy Savdo — harbiy anjomlar</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <meta name="description" content="Harbiy anjomlarning barcha turlari: kiyim, poyabzal, bosh kiyim, taktik jihozlar. Qo'qon savdo kompleksi bozori.">
@@ -38,7 +38,7 @@ header{background:linear-gradient(180deg,#232a17 0%,var(--fon) 100%);border-bott
 .manzil{margin-top:10px;color:var(--xira);font-size:14px}
 
 .boshqaruv{position:sticky;top:0;z-index:5;background:rgba(20,23,15,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--chiziq);padding:12px 0}
-.qidir{width:100%;padding:11px 14px;border-radius:10px;border:1px solid var(--chiziq);background:var(--fon2);color:var(--matn);font-size:15px}
+.qidir{width:100%;padding:11px 14px;border-radius:10px;border:1px solid var(--chiziq);background:var(--fon2);color:var(--matn);font-size:16px}
 .turlar{display:flex;gap:8px;overflow-x:auto;padding-top:10px;scrollbar-width:none}
 .turlar::-webkit-scrollbar{display:none}
 .tur{flex:none;padding:7px 13px;border-radius:999px;border:1px solid var(--chiziq);background:transparent;color:var(--xira);font-size:14px;cursor:pointer;white-space:nowrap}
@@ -61,9 +61,12 @@ header{background:linear-gradient(180deg,#232a17 0%,var(--fon) 100%);border-bott
 
 .oyna{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;z-index:20;padding:16px}
 .oyna.ochiq{display:flex}
-.quti{background:var(--fon2);border:1px solid var(--chiziq);border-radius:14px;max-width:980px;width:100%;max-height:calc(100vh - 32px);overflow:auto;display:grid;grid-template-columns:1.2fr 1fr}
+.yop-ust{display:none;position:fixed;top:calc(10px + env(safe-area-inset-top));right:10px;z-index:25;width:44px;height:44px;border-radius:50%;background:rgba(20,23,15,.9);color:#fff;border:1px solid var(--chiziq);font-size:26px;line-height:1;cursor:pointer}
+@media(max-width:760px){.oyna{padding:8px}.quti{max-height:calc(100vh - 16px);max-height:calc(100dvh - 16px)}.oyna.ochiq .yop-ust{display:block}}
+.quti{background:var(--fon2);border:1px solid var(--chiziq);border-radius:14px;max-width:980px;width:100%;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow:auto;display:grid;grid-template-columns:1.2fr 1fr}
 @media(max-width:760px){.quti{grid-template-columns:1fr}}
-.galereya{background:#fff;position:relative}
+.galereya{background:#fff;position:relative;min-width:0}
+.tafsil{min-width:0}
 .galereya .katta{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff}
 .galereya video{width:100%;aspect-ratio:1/1;background:#000}
 .kichiklar{display:flex;gap:6px;padding:8px;background:var(--fon2);overflow-x:auto}
@@ -85,6 +88,36 @@ header{background:linear-gradient(180deg,#232a17 0%,var(--fon) 100%);border-bott
 footer{border-top:1px solid var(--chiziq);padding:24px 0 34px;color:var(--xira);font-size:14px}
 footer .aloqa{margin-top:10px}
 .bosh-yoq{padding:40px 0;text-align:center;color:var(--xira)}
+.yorliq.yangi{top:auto;bottom:8px;background:var(--asosiy);color:var(--asosiy-q);font-weight:700}
+.blok-sarlavha{font-size:14px;color:var(--xira);margin:4px 0 6px}
+.olchamlar{display:flex;flex-wrap:wrap;gap:6px}
+.olc{min-width:46px;min-height:40px;padding:8px 10px;border-radius:8px;border:1px solid var(--chiziq);background:var(--karta);color:var(--matn);cursor:pointer;font-weight:600;font-size:14px}
+.olc.faol{background:var(--asosiy);color:var(--asosiy-q);border-color:var(--asosiy)}
+.olc-izoh{font-size:12px;color:var(--xira);margin-top:6px}
+.ogoh{color:#e3b04b;font-size:13px;min-height:18px}
+.soni{display:inline-flex;align-items:center;border:1px solid var(--chiziq);border-radius:10px;overflow:hidden;background:var(--karta)}
+.soni button{width:40px;height:40px;background:transparent;border:0;color:var(--matn);font-size:20px;cursor:pointer}
+.soni span{min-width:34px;text-align:center;font-weight:700}
+.qosh-qator{display:flex;gap:10px;align-items:center}
+.qosh-qator .btn{flex:1;justify-content:center;padding:12px}
+.oxshash{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:760px){.oxshash{grid-template-columns:repeat(2,1fr)}}
+.oxshash button{padding:0;border:1px solid var(--chiziq);border-radius:10px;overflow:hidden;background:var(--karta);color:var(--matn);cursor:pointer;text-align:left}
+.oxshash img{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff}
+.oxshash span{display:block;padding:6px 8px;font-size:12px;line-height:1.3}
+.savat-tugma{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:15;display:none;align-items:center;gap:8px;padding:14px 18px;border-radius:999px;border:0;background:var(--asosiy);color:var(--asosiy-q);font-weight:800;font-size:15px;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.45)}
+.savat-tugma.bor{display:inline-flex}
+.quti.bir{grid-template-columns:1fr;max-width:600px}
+.savat{padding:20px;display:flex;flex-direction:column;gap:12px}
+.savat-qator{display:grid;grid-template-columns:60px 1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--chiziq)}
+.savat-qator img{width:60px;height:60px;object-fit:contain;background:#fff;border-radius:8px}
+.savat-qator .nomi{font-size:14px;font-weight:600}
+.savat-qator .tur2{font-size:12px;color:var(--xira)}
+.savat-qator .ol{background:none;border:0;color:var(--xira);font-size:12px;cursor:pointer;padding:4px 0;text-decoration:underline}
+.maydon{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--chiziq);background:var(--karta);color:var(--matn);font-size:16px}
+.buyurtma-matn{width:100%;min-height:110px;padding:10px;border-radius:10px;border:1px solid var(--chiziq);background:var(--karta);color:var(--matn);font:14px/1.4 inherit;resize:vertical}
+.kichik-matn{font-size:13px;color:var(--xira)}
+.bosh-savat{padding:24px 0;text-align:center;color:var(--xira)}
 </style>
 </head>
 <body>
@@ -102,7 +135,7 @@ footer .aloqa{margin-top:10px}
     </div>
     <div class="banner">
       <h2>Harbiy anjomlarning barcha turlari</h2>
-      <p>Kiyim, poyabzal, bosh kiyim, taktik jihozlar, g'iloflar, nishonlar, fonarlar. Narxi va o'lchami bo'yicha Telegram yoki telefon orqali murojaat qiling.</p>
+      <p>Kiyim, poyabzal, bosh kiyim, taktik jihozlar, g'iloflar, nishonlar, fonarlar. Mahsulotlarni savatga yig'ing va buyurtmani Telegram orqali yuboring. Narxi bo'yicha Telegram yoki telefon orqali murojaat qiling.</p>
       <div class="manzil">📍 «Qo'qon savdo kompleksi» bozori · Telegram kanal: <a href="https://t.me/qoqonharbiysavdo" target="_blank" rel="noopener">@qoqonharbiysavdo</a></div>
     </div>
   </div>
@@ -133,16 +166,38 @@ footer .aloqa{margin-top:10px}
   </div>
 </footer>
 
+<button class="savat-tugma" id="savatTugma" type="button">🛒 Savat · <span id="savatSon">0</span></button>
+
 <div class="oyna" id="oyna" role="dialog" aria-modal="true">
+  <button class="yop-ust" id="yopUst" type="button" aria-label="Yopish">×</button>
   <div class="quti" id="quti"></div>
 </div>
 
 <script>
-const M = [{"n": 1, "nom": "Kamuflyaj forma (ko'ylak + shim)", "tur": "Kiyim", "izoh": "", "rasm": ["3386", "3384", "3385"], "video": []}, {"n": 2, "nom": "Yashil xizmat ko'ylagi", "tur": "Kiyim", "izoh": "", "rasm": ["3387"], "video": []}, {"n": 3, "nom": "Flis balaklava (bosh va bo'yin uchun)", "tur": "Bosh kiyim", "izoh": "Ranglar: qum rang, yashil, qora", "rasm": ["3389", "3388", "3390"], "video": []}, {"n": 4, "nom": "Taktik ryukzak", "tur": "Taktik jihozlar", "izoh": "Ranglar: yashil, kamuflyaj, qora", "rasm": ["3392", "3391", "3393"], "video": []}, {"n": 5, "nom": "Panama", "tur": "Bosh kiyim", "izoh": "2 xil kamuflyaj", "rasm": ["3394", "3395"], "video": []}, {"n": 6, "nom": "Charm to'pponcha g'ilofi", "tur": "G'iloflar", "izoh": "", "rasm": ["3396"], "video": []}, {"n": 7, "nom": "Charm osma ushlagich", "tur": "G'iloflar", "izoh": "", "rasm": ["3397"], "video": []}, {"n": 8, "nom": "Termo ichki kiyim (to'plam)", "tur": "Kiyim", "izoh": "Ranglar: yashil, qora, kamuflyaj", "rasm": ["3398", "3399", "3400", "3401"], "video": []}, {"n": 9, "nom": "Signal chiroq (qizil-ko'k)", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3403"], "video": ["3435"]}, {"n": 10, "nom": "Plastik to'pponcha g'ilofi", "tur": "G'iloflar", "izoh": "", "rasm": ["3412", "3404", "3405"], "video": []}, {"n": 11, "nom": "Harbiy xizmat nishoni medali (qutida)", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3406", "3407"], "video": []}, {"n": 12, "nom": "Taktik bolta", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3408"], "video": []}, {"n": 13, "nom": "Kuchli fonar (zaryadlanadigan)", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3409"], "video": []}, {"n": 14, "nom": "Oq qo'lqop", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3410"], "video": []}, {"n": 15, "nom": "Yorug'lik tayoqchalari", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3411"], "video": []}, {"n": 16, "nom": "Multitul-bolta (g'ilofli)", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3413"], "video": []}, {"n": 17, "nom": "Charm kalit qopchasi", "tur": "Nishon va aksessuarlar", "izoh": "Ranglar: qora, jigarrang", "rasm": ["3415", "3416"], "video": ["3414"]}, {"n": 18, "nom": "Guvohnoma muqovasi (charm)", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3419"], "video": ["3418"]}, {"n": 19, "nom": "Aptechka sumkasi", "tur": "Taktik jihozlar", "izoh": "", "rasm": ["3421"], "video": []}, {"n": 20, "nom": "Plitonoska (multicam)", "tur": "Taktik jihozlar", "izoh": "", "rasm": ["3426", "3427", "3422", "3423"], "video": ["3420"]}, {"n": 21, "nom": "Magazin cho'ntaklari", "tur": "Taktik jihozlar", "izoh": "", "rasm": ["3424"], "video": []}, {"n": 22, "nom": "Shevronlar to'plami", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3433"], "video": []}, {"n": 23, "nom": "Kurvimetr / kompas (qutida)", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3434"], "video": []}, {"n": 24, "nom": "Plastik karabin", "tur": "Taktik jihozlar", "izoh": "", "rasm": ["3436"], "video": []}, {"n": 25, "nom": "Bilakka taqiladigan kompas", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3437"], "video": []}, {"n": 26, "nom": "Paxtali shim", "tur": "Kiyim", "izoh": "", "rasm": ["3438"], "video": []}, {"n": 27, "nom": "Harbiy kotelok", "tur": "Taktik jihozlar", "izoh": "", "rasm": ["3440"], "video": []}, {"n": 28, "nom": "Bel sumkasi", "tur": "Taktik jihozlar", "izoh": "4 xil rang", "rasm": ["3441"], "video": []}, {"n": 29, "nom": "Dumaloq shevron", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3443"], "video": []}, {"n": 30, "nom": "Sport termo kiyim (qora / yashil)", "tur": "Kiyim", "izoh": "", "rasm": ["3444", "3445"], "video": ["3446"]}, {"n": 31, "nom": "Termo ichki kiyim (qishki)", "tur": "Kiyim", "izoh": "", "rasm": ["3447"], "video": []}, {"n": 32, "nom": "Trikotaj shapka", "tur": "Bosh kiyim", "izoh": "5 xil rang", "rasm": ["3449"], "video": []}, {"n": 33, "nom": "Qora baland botinka", "tur": "Poyabzal", "izoh": "", "rasm": ["3450", "3451"], "video": []}, {"n": 34, "nom": "Krossovka (qora)", "tur": "Poyabzal", "izoh": "", "rasm": ["3452"], "video": []}, {"n": 35, "nom": "Flis kurtka (yashil + kamuflyaj)", "tur": "Kiyim", "izoh": "", "rasm": ["3453"], "video": []}, {"n": 36, "nom": "Flis kurtka (raqamli kamuflyaj)", "tur": "Kiyim", "izoh": "", "rasm": ["3454"], "video": []}, {"n": 37, "nom": "Softshell kostyum (kapyushonli)", "tur": "Kiyim", "izoh": "Kanalda: «Qora Yashil ranglar bor». Rasmlarda: qora, yashil, kamuflyaj, qum rang, kulrang", "rasm": ["3477", "3478", "3476", "3503", "3501", "3502", "3504", "3455"], "video": []}, {"n": 38, "nom": "Qishki kurtka (qora)", "tur": "Kiyim", "izoh": "", "rasm": ["3456"], "video": []}, {"n": 39, "nom": "Flis kurtka (yashil)", "tur": "Kiyim", "izoh": "", "rasm": ["3457"], "video": []}, {"n": 40, "nom": "Kamuflyaj plash", "tur": "Kiyim", "izoh": "", "rasm": ["3458"], "video": []}, {"n": 41, "nom": "Qora arqon", "tur": "Taktik jihozlar", "izoh": "", "rasm": ["3459", "3460"], "video": []}, {"n": 42, "nom": "Softshell kurtka", "tur": "Kiyim", "izoh": "Ranglar: yashil, qora, qora kamuflyaj, kamuflyaj", "rasm": ["3461", "3462", "3463", "3464"], "video": ["3432"]}, {"n": 43, "nom": "Shovqindan himoya quloqchini", "tur": "Fonar va asboblar", "izoh": "Ranglar: qum rang, yashil, qora", "rasm": ["3466", "3465", "3467"], "video": []}, {"n": 44, "nom": "Multicam kitel + shim", "tur": "Kiyim", "izoh": "", "rasm": ["3468"], "video": []}, {"n": 45, "nom": "Multicam qishki kurtka (kapyushonli)", "tur": "Kiyim", "izoh": "", "rasm": ["3473"], "video": []}, {"n": 46, "nom": "Multicam yozgi kostyum", "tur": "Kiyim", "izoh": "", "rasm": ["3471"], "video": []}, {"n": 47, "nom": "Qishki kostyum (yashil / multicam)", "tur": "Kiyim", "izoh": "", "rasm": ["3474", "3475"], "video": []}, {"n": 48, "nom": "Signal jilet", "tur": "Kiyim", "izoh": "", "rasm": ["3479"], "video": []}, {"n": 49, "nom": "Tantanali kamar", "tur": "Kamarlar", "izoh": "", "rasm": ["3480"], "video": []}, {"n": 50, "nom": "LED yo'l harakati tayoqchasi", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3481", "3482"], "video": []}, {"n": 51, "nom": "Qora taktik kamar", "tur": "Kamarlar", "izoh": "", "rasm": ["3483"], "video": []}, {"n": 52, "nom": "Taktik kamar", "tur": "Kamarlar", "izoh": "Ranglar: yashil, qora, to'q sariq", "rasm": ["3487", "3484"], "video": []}, {"n": 53, "nom": "Maxsus ish kiyimi", "tur": "Kiyim", "izoh": "", "rasm": ["3486"], "video": []}, {"n": 54, "nom": "Kaska chexoli", "tur": "Bosh kiyim", "izoh": "", "rasm": ["3488"], "video": []}, {"n": 55, "nom": "Yulduzli nishon", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3494", "3495"], "video": []}, {"n": 56, "nom": "Harbiy sportchi va desantchi nishonlari", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3496"], "video": []}, {"n": 57, "nom": "Qilichli nishon", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3497"], "video": []}, {"n": 58, "nom": "Tilla rang tugmalar", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3498"], "video": []}, {"n": 59, "nom": "Klass nishonlari (M, 1, 2, 3)", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3499"], "video": []}, {"n": 60, "nom": "Taktik botinka (qishki)", "tur": "Poyabzal", "izoh": "", "rasm": ["3500"], "video": ["3493"]}, {"n": 61, "nom": "Glock uchun g'ilof", "tur": "G'iloflar", "izoh": "Glock 17 va Glock 19 uchun", "rasm": ["3505", "3506", "3507"], "video": []}, {"n": 62, "nom": "Kamuflyaj to'qima kamar", "tur": "Kamarlar", "izoh": "", "rasm": ["k3402"], "video": ["3402"]}, {"n": 63, "nom": "Teleskopik fonar (ekranli)", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["k3429"], "video": ["3429"]}, {"n": 64, "nom": "Kemping fonari", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["k3430"], "video": ["3430"]}, {"n": 65, "nom": "Kichik fonar", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["k3431"], "video": ["3431"]}];
+const M = [{"n": 1, "nom": "Kamuflyaj forma (ko'ylak + shim)", "tur": "Kiyim", "izoh": "", "rasm": ["3386", "3384", "3385"], "video": [], "sana": "2026-08-18", "yangi": false, "olcham": ["S", "M", "L", "XL", "XXL", "XXXL"], "olcham_rasmda": false}, {"n": 2, "nom": "Yashil xizmat ko'ylagi", "tur": "Kiyim", "izoh": "", "rasm": ["3387"], "video": [], "sana": "2026-08-18", "yangi": false, "olcham": ["S", "M", "L", "XL", "XXL", "XXXL"], "olcham_rasmda": false}, {"n": 3, "nom": "Flis balaklava (bosh va bo'yin uchun)", "tur": "Bosh kiyim", "izoh": "Ranglar: qum rang, yashil, qora", "rasm": ["3389", "3388", "3390"], "video": [], "sana": "2026-08-18", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 4, "nom": "Taktik ryukzak", "tur": "Taktik jihozlar", "izoh": "Ranglar: yashil, kamuflyaj, qora", "rasm": ["3392", "3391", "3393"], "video": [], "sana": "2026-08-18", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 5, "nom": "Panama", "tur": "Bosh kiyim", "izoh": "2 xil kamuflyaj", "rasm": ["3394", "3395"], "video": [], "sana": "2026-08-18", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 6, "nom": "Charm to'pponcha g'ilofi", "tur": "G'iloflar", "izoh": "", "rasm": ["3396"], "video": [], "sana": "2026-08-18", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 7, "nom": "Charm osma ushlagich", "tur": "G'iloflar", "izoh": "", "rasm": ["3397"], "video": [], "sana": "2026-08-18", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 8, "nom": "Termo ichki kiyim (to'plam)", "tur": "Kiyim", "izoh": "Ranglar: yashil, qora, kamuflyaj", "rasm": ["3398", "3399", "3400", "3401"], "video": [], "sana": "2026-08-18", "yangi": false, "olcham": ["S", "M", "L", "XL", "XXL", "XXXL"], "olcham_rasmda": false}, {"n": 9, "nom": "Signal chiroq (qizil-ko'k)", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3403"], "video": ["3435"], "sana": "2026-08-21", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 10, "nom": "Plastik to'pponcha g'ilofi", "tur": "G'iloflar", "izoh": "", "rasm": ["3412", "3404", "3405"], "video": [], "sana": "2026-08-24", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 11, "nom": "Harbiy xizmat nishoni medali (qutida)", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3406", "3407"], "video": [], "sana": "2026-08-24", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 12, "nom": "Taktik bolta", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3408"], "video": [], "sana": "2026-08-27", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 13, "nom": "Kuchli fonar (zaryadlanadigan)", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3409"], "video": [], "sana": "2026-08-27", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 14, "nom": "Oq qo'lqop", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3410"], "video": [], "sana": "2026-08-27", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 15, "nom": "Yorug'lik tayoqchalari", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3411"], "video": [], "sana": "2026-08-27", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 16, "nom": "Multitul-bolta (g'ilofli)", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3413"], "video": [], "sana": "2026-08-28", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 17, "nom": "Charm kalit qopchasi", "tur": "Nishon va aksessuarlar", "izoh": "Ranglar: qora, jigarrang", "rasm": ["3415", "3416"], "video": ["3414"], "sana": "2026-09-09", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 18, "nom": "Guvohnoma muqovasi (charm)", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3419"], "video": ["3418"], "sana": "2026-09-15", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 19, "nom": "Aptechka sumkasi", "tur": "Taktik jihozlar", "izoh": "", "rasm": ["3421"], "video": [], "sana": "2026-09-16", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 20, "nom": "Plitonoska (multicam)", "tur": "Taktik jihozlar", "izoh": "", "rasm": ["3426", "3427", "3422", "3423"], "video": ["3420"], "sana": "2026-09-16", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 21, "nom": "Magazin cho'ntaklari", "tur": "Taktik jihozlar", "izoh": "", "rasm": ["3424"], "video": [], "sana": "2026-09-17", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 22, "nom": "Shevronlar to'plami", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3433"], "video": [], "sana": "2026-09-29", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 23, "nom": "Kurvimetr / kompas (qutida)", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3434"], "video": [], "sana": "2026-09-29", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 24, "nom": "Plastik karabin", "tur": "Taktik jihozlar", "izoh": "", "rasm": ["3436"], "video": [], "sana": "2026-09-29", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 25, "nom": "Bilakka taqiladigan kompas", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3437"], "video": [], "sana": "2026-09-29", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 26, "nom": "Paxtali shim", "tur": "Kiyim", "izoh": "", "rasm": ["3438"], "video": [], "sana": "2026-09-29", "yangi": false, "olcham": ["S", "M", "L", "XL", "XXL", "XXXL"], "olcham_rasmda": false}, {"n": 27, "nom": "Harbiy kotelok", "tur": "Taktik jihozlar", "izoh": "", "rasm": ["3440"], "video": [], "sana": "2026-09-29", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 28, "nom": "Bel sumkasi", "tur": "Taktik jihozlar", "izoh": "4 xil rang", "rasm": ["3441"], "video": [], "sana": "2026-09-29", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 29, "nom": "Dumaloq shevron", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3443"], "video": [], "sana": "2026-09-30", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 30, "nom": "Sport termo kiyim (qora / yashil)", "tur": "Kiyim", "izoh": "", "rasm": ["3444", "3445"], "video": ["3446"], "sana": "2026-10-01", "yangi": false, "olcham": ["S", "M", "L", "XL", "XXL", "XXXL"], "olcham_rasmda": false}, {"n": 31, "nom": "Termo ichki kiyim (qishki)", "tur": "Kiyim", "izoh": "", "rasm": ["3447"], "video": [], "sana": "2026-10-01", "yangi": false, "olcham": ["S", "M", "L", "XL", "XXL"], "olcham_rasmda": true}, {"n": 32, "nom": "Trikotaj shapka", "tur": "Bosh kiyim", "izoh": "5 xil rang", "rasm": ["3449"], "video": [], "sana": "2026-10-02", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 33, "nom": "Qora baland botinka", "tur": "Poyabzal", "izoh": "", "rasm": ["3450", "3451"], "video": [], "sana": "2026-10-06", "yangi": false, "olcham": ["40", "41", "42", "43", "44", "45", "46"], "olcham_rasmda": false}, {"n": 34, "nom": "Krossovka (qora)", "tur": "Poyabzal", "izoh": "", "rasm": ["3452"], "video": [], "sana": "2026-10-06", "yangi": false, "olcham": ["40", "41", "42", "43", "44", "45", "46"], "olcham_rasmda": false}, {"n": 35, "nom": "Flis kurtka (yashil + kamuflyaj)", "tur": "Kiyim", "izoh": "", "rasm": ["3453"], "video": [], "sana": "2026-10-09", "yangi": false, "olcham": ["S", "M", "L", "XL", "XXL", "XXXL"], "olcham_rasmda": false}, {"n": 36, "nom": "Flis kurtka (raqamli kamuflyaj)", "tur": "Kiyim", "izoh": "", "rasm": ["3454"], "video": [], "sana": "2026-10-09", "yangi": false, "olcham": ["S", "M", "L", "XL", "XXL", "XXXL"], "olcham_rasmda": false}, {"n": 37, "nom": "Softshell kostyum (kapyushonli)", "tur": "Kiyim", "izoh": "Kanalda: «Qora Yashil ranglar bor». Rasmlarda: qora, yashil, kamuflyaj, qum rang, kulrang", "rasm": ["3477", "3478", "3476", "3503", "3501", "3502", "3504", "3455"], "video": [], "sana": "2026-10-12", "yangi": false, "olcham": ["S", "M", "L", "XL", "XXL", "XXXL"], "olcham_rasmda": false}, {"n": 38, "nom": "Qishki kurtka (qora)", "tur": "Kiyim", "izoh": "", "rasm": ["3456"], "video": [], "sana": "2026-10-12", "yangi": false, "olcham": ["S", "M", "L", "XL", "XXL", "XXXL"], "olcham_rasmda": false}, {"n": 39, "nom": "Flis kurtka (yashil)", "tur": "Kiyim", "izoh": "", "rasm": ["3457"], "video": [], "sana": "2026-10-12", "yangi": false, "olcham": ["S", "M", "L", "XL", "XXL", "XXXL"], "olcham_rasmda": false}, {"n": 40, "nom": "Kamuflyaj plash", "tur": "Kiyim", "izoh": "", "rasm": ["3458"], "video": [], "sana": "2026-10-12", "yangi": false, "olcham": ["S", "M", "L", "XL", "XXL", "XXXL"], "olcham_rasmda": false}, {"n": 41, "nom": "Qora arqon", "tur": "Taktik jihozlar", "izoh": "", "rasm": ["3459", "3460"], "video": [], "sana": "2026-10-12", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 42, "nom": "Softshell kurtka", "tur": "Kiyim", "izoh": "Ranglar: yashil, qora, qora kamuflyaj, kamuflyaj", "rasm": ["3461", "3462", "3463", "3464"], "video": ["3432"], "sana": "2026-09-27", "yangi": false, "olcham": ["S", "M", "L", "XL", "XXL", "XXXL"], "olcham_rasmda": false}, {"n": 43, "nom": "Shovqindan himoya quloqchini", "tur": "Fonar va asboblar", "izoh": "Ranglar: qum rang, yashil, qora", "rasm": ["3466", "3465", "3467"], "video": [], "sana": "2026-10-12", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 44, "nom": "Multicam kitel + shim", "tur": "Kiyim", "izoh": "", "rasm": ["3468"], "video": [], "sana": "2026-10-12", "yangi": false, "olcham": ["S", "M", "L", "XL", "XXL", "XXXL"], "olcham_rasmda": false}, {"n": 45, "nom": "Multicam qishki kurtka (kapyushonli)", "tur": "Kiyim", "izoh": "", "rasm": ["3473"], "video": [], "sana": "2026-10-17", "yangi": false, "olcham": ["S", "M", "L", "XL", "XXL", "XXXL"], "olcham_rasmda": false}, {"n": 46, "nom": "Multicam yozgi kostyum", "tur": "Kiyim", "izoh": "", "rasm": ["3471"], "video": [], "sana": "2026-10-17", "yangi": false, "olcham": ["S", "M", "L", "XL", "XXL", "XXXL"], "olcham_rasmda": false}, {"n": 47, "nom": "Qishki kostyum (yashil / multicam)", "tur": "Kiyim", "izoh": "", "rasm": ["3474", "3475"], "video": [], "sana": "2026-10-17", "yangi": false, "olcham": ["S", "M", "L", "XL", "XXL", "XXXL"], "olcham_rasmda": false}, {"n": 48, "nom": "Signal jilet", "tur": "Kiyim", "izoh": "", "rasm": ["3479"], "video": [], "sana": "2026-10-21", "yangi": false, "olcham": ["S", "M", "L", "XL", "XXL", "XXXL"], "olcham_rasmda": false}, {"n": 49, "nom": "Tantanali kamar", "tur": "Kamarlar", "izoh": "", "rasm": ["3480"], "video": [], "sana": "2026-10-22", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 50, "nom": "LED yo'l harakati tayoqchasi", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["3481", "3482"], "video": [], "sana": "2026-10-22", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 51, "nom": "Qora taktik kamar", "tur": "Kamarlar", "izoh": "", "rasm": ["3483"], "video": [], "sana": "2026-10-23", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 52, "nom": "Taktik kamar", "tur": "Kamarlar", "izoh": "Ranglar: yashil, qora, to'q sariq", "rasm": ["3487", "3484"], "video": [], "sana": "2026-10-23", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 53, "nom": "Maxsus ish kiyimi", "tur": "Kiyim", "izoh": "", "rasm": ["3486"], "video": [], "sana": "2026-10-24", "yangi": false, "olcham": ["S", "M", "L", "XL", "XXL", "XXXL"], "olcham_rasmda": false}, {"n": 54, "nom": "Kaska chexoli", "tur": "Bosh kiyim", "izoh": "", "rasm": ["3488"], "video": [], "sana": "2026-10-24", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 55, "nom": "Yulduzli nishon", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3494", "3495"], "video": [], "sana": "2026-10-31", "yangi": true, "olcham": [], "olcham_rasmda": false}, {"n": 56, "nom": "Harbiy sportchi va desantchi nishonlari", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3496"], "video": [], "sana": "2026-10-31", "yangi": true, "olcham": [], "olcham_rasmda": false}, {"n": 57, "nom": "Qilichli nishon", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3497"], "video": [], "sana": "2026-10-31", "yangi": true, "olcham": [], "olcham_rasmda": false}, {"n": 58, "nom": "Tilla rang tugmalar", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3498"], "video": [], "sana": "2026-10-31", "yangi": true, "olcham": [], "olcham_rasmda": false}, {"n": 59, "nom": "Klass nishonlari (M, 1, 2, 3)", "tur": "Nishon va aksessuarlar", "izoh": "", "rasm": ["3499"], "video": [], "sana": "2026-10-31", "yangi": true, "olcham": [], "olcham_rasmda": false}, {"n": 60, "nom": "Taktik botinka (qishki)", "tur": "Poyabzal", "izoh": "", "rasm": ["3500"], "video": ["3493"], "sana": "2026-10-28", "yangi": true, "olcham": ["40", "41", "42", "43", "44", "45", "46"], "olcham_rasmda": false}, {"n": 61, "nom": "Glock uchun g'ilof", "tur": "G'iloflar", "izoh": "Glock 17 va Glock 19 uchun", "rasm": ["3505", "3506", "3507"], "video": [], "sana": "2026-11-08", "yangi": true, "olcham": [], "olcham_rasmda": false}, {"n": 62, "nom": "Kamuflyaj to'qima kamar", "tur": "Kamarlar", "izoh": "", "rasm": ["k3402"], "video": ["3402"], "sana": "2026-08-21", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 63, "nom": "Teleskopik fonar (ekranli)", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["k3429"], "video": ["3429"], "sana": "2026-09-24", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 64, "nom": "Kemping fonari", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["k3430"], "video": ["3430"], "sana": "2026-09-24", "yangi": false, "olcham": [], "olcham_rasmda": false}, {"n": 65, "nom": "Kichik fonar", "tur": "Fonar va asboblar", "izoh": "", "rasm": ["k3431"], "video": ["3431"], "sana": "2026-09-24", "yangi": false, "olcham": [], "olcham_rasmda": false}];
 const TURLAR = ["Hammasi","Kiyim","Poyabzal","Bosh kiyim","Taktik jihozlar","Kamarlar","G'iloflar","Nishon va aksessuarlar","Fonar va asboblar"];
-let tur = "Hammasi", soz = "";
+const SOTUVCHI = "Farruxbeksodiqjonovich", TEL = "+998911544181";
+let tur = "Hammasi", soz = "", oyna = null; // oyna: null | "mahsulot" | "savat"
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const TG = (window.Telegram && Telegram.WebApp && Telegram.WebApp.initData) ? Telegram.WebApp : null;
+
+// Savat: [{n, olcham, soni}] — faqat shu qurilmada saqlanadi
+let savat = [];
+try { savat = JSON.parse(localStorage.getItem("savat") || "[]").filter(x => M.some(m => m.n === x.n)); } catch(e) { savat = []; }
+const saqla = () => { try { localStorage.setItem("savat", JSON.stringify(savat)); } catch(e) {} savatBelgi(); };
+const jami = () => savat.reduce((a, x) => a + x.soni, 0);
+function savatBelgi(){
+  $("#savatSon").textContent = jami();
+  $("#savatTugma").classList.toggle("bor", !TG && jami() > 0 && !oyna);
+  tgTugma();
+}
+function savatga(n, olcham, soni){
+  const x = savat.find(y => y.n === n && y.olcham === olcham);
+  if(x) x.soni += soni; else savat.push({n, olcham, soni});
+  saqla();
+  if(TG) try { TG.HapticFeedback.notificationOccurred("success"); } catch(e) {}
+}
 
 function turlarniChiz(){
   $("#turlar").innerHTML = TURLAR.map(t => {
@@ -160,6 +215,7 @@ function chiz(){
         <img src="rasmlar/${m.rasm[0]}_k.jpg" alt="${esc(m.nom)}" loading="lazy">
         ${m.rasm.length>1?`<span class="yorliq">${m.rasm.length} rasm</span>`:""}
         ${m.video.length?`<span class="yorliq v">▶ video</span>`:""}
+        ${m.yangi?`<span class="yorliq yangi">Yangi</span>`:""}
       </div>
       <div class="mal">
         <span class="turi">${esc(m.tur)}</span>
@@ -168,15 +224,23 @@ function chiz(){
       </div>
     </div>`).join("") : `<div class="bosh-yoq">Hech narsa topilmadi</div>`;
 }
+function oxshashlar(m){
+  const bir = M.filter(x => x.tur === m.tur && x.n !== m.n);
+  const i = bir.findIndex(x => x.n > m.n);
+  return (i < 0 ? bir : bir.slice(i).concat(bir.slice(0, i))).slice(0, 4);
+}
 function och(n){
   const m = M.find(x => x.n === n); if(!m) return;
   const el = [...m.rasm.map(r => ({t:"r", r})), ...m.video.map(v => ({t:"v", v}))];
+  let olcham = m.olcham.length === 1 ? m.olcham[0] : "", soni = 1;
   const ko = i => { const e = el[i];
     $("#asosiy").innerHTML = e.t === "r"
       ? `<img class="katta" src="rasmlar/${e.r}.jpg" alt="${esc(m.nom)}">`
       : `<video src="video/${e.v}.mp4" controls autoplay playsinline preload="none"></video>`;
     document.querySelectorAll(".kichiklar button").forEach((b,k) => b.classList.toggle("faol", k===i));
   };
+  const ox = oxshashlar(m);
+  $("#quti").className = "quti";
   $("#quti").innerHTML = `
     <div class="galereya">
       <div id="asosiy"></div>
@@ -186,48 +250,137 @@ function och(n){
     </div>
     <div class="tafsil">
       <div class="sarlavha"><h2>${esc(m.nom)}</h2><button class="yop" id="yop" aria-label="Yopish">×</button></div>
-      <span class="turi" style="color:var(--xira)">${esc(m.tur)}</span>
+      <span class="turi" style="color:var(--xira)">${esc(m.tur)}${m.yangi?" · <b style='color:var(--asosiy)'>Yangi</b>":""}</span>
       ${m.izoh?`<p class="izoh">${esc(m.izoh)}</p>`:""}
       <div class="narx">Narxini so'rang</div>
+      ${m.olcham.length?`<div>
+        <div class="blok-sarlavha">${m.olcham_rasmda?"O'lchamlar (reklama rasmida ko'rsatilgan):":"Kerakli o'lchamingizni tanlang:"}</div>
+        <div class="olchamlar">${m.olcham.map(o=>`<button class="olc${o===olcham?' faol':''}" data-o="${esc(o)}">${esc(o)}</button>`).join("")}</div>
+        <div class="olc-izoh">Borligini sotuvchi tasdiqlaydi.</div>
+      </div>`:""}
+      <div class="qosh-qator">
+        <div class="soni"><button id="kam" aria-label="Kamaytirish">−</button><span id="soniK">1</span><button id="kop" aria-label="Ko'paytirish">+</button></div>
+        <button class="btn asosiy" id="qosh">🛒 Savatga qo'shish</button>
+      </div>
+      <div class="ogoh" id="ogoh"></div>
       <div class="raqam">Mahsulot raqami: <b>№${m.n}</b> — yozganingizda yoki qo'ng'iroq qilganingizda shu raqamni ayting.</div>
       <div class="tugmalar">
-        <a class="btn tg" href="https://t.me/Farruxbeksodiqjonovich" target="_blank" rel="noopener">Telegramda buyurtma berish</a>
-        <a class="btn asosiy" href="tel:+998911544181">Qo'ng'iroq qilish: +998 91 154 41 81</a>
+        <a class="btn tg" href="https://t.me/${SOTUVCHI}" target="_blank" rel="noopener">Telegramda yozish</a>
+        <a class="btn" href="tel:${TEL}">Qo'ng'iroq qilish: +998 91 154 41 81</a>
       </div>
       <div class="manzil" style="font-size:13px;color:var(--xira)">📍 «Qo'qon savdo kompleksi» bozori</div>
+      ${ox.length?`<div><div class="blok-sarlavha">O'xshash mahsulotlar</div>
+        <div class="oxshash">${ox.map(x=>`<button data-n="${x.n}"><img src="rasmlar/${x.rasm[0]}_k.jpg" alt="" loading="lazy"><span>${esc(x.nom)}</span></button>`).join("")}</div></div>`:""}
     </div>`;
   document.querySelectorAll(".kichiklar button").forEach(b => b.onclick = () => ko(+b.dataset.i));
+  document.querySelectorAll(".olc").forEach(b => b.onclick = () => {
+    olcham = b.dataset.o; document.querySelectorAll(".olc").forEach(x => x.classList.toggle("faol", x === b)); $("#ogoh").textContent = "";
+  });
+  $("#kam").onclick = () => { soni = Math.max(1, soni - 1); $("#soniK").textContent = soni; };
+  $("#kop").onclick = () => { soni = Math.min(99, soni + 1); $("#soniK").textContent = soni; };
+  $("#qosh").onclick = () => {
+    if(m.olcham.length && !olcham){ $("#ogoh").textContent = "Avval o'lchamni tanlang"; return; }
+    savatga(m.n, olcham, soni);
+    $("#ogoh").innerHTML = `<span style="color:var(--asosiy)">✓ Savatga qo'shildi</span>${TG?"":` · <a href="#" id="savatgaOt" style="color:var(--asosiy)">Savatni ochish</a>`}`;
+    const s2 = $("#savatgaOt"); if(s2) s2.onclick = e => { e.preventDefault(); savatOch(); };
+  };
+  document.querySelectorAll(".oxshash button").forEach(b => b.onclick = () => och(+b.dataset.n));
   ko(0);
   $("#yop").onclick = yop;
-  $("#oyna").classList.add("ochiq");
-  if(TG) TG.BackButton.show();
-  document.body.style.overflow = "hidden";
+  ochiqQil("mahsulot");
+  $("#quti").scrollTop = 0;
   history.replaceState(null, "", "#m" + n);
 }
+function buyurtmaMatni(){
+  const qator = savat.map((x, i) => { const m = M.find(y => y.n === x.n);
+    return `${i+1}) №${m.n} ${m.nom}${x.olcham ? " — o'lcham: " + x.olcham : ""} — ${x.soni} dona`; });
+  const ism = ($("#ism") && $("#ism").value.trim()) || "", tel = ($("#tel") && $("#tel").value.trim()) || "";
+  return "Assalomu alaykum! Saytdan buyurtma:\n" + qator.join("\n") + (ism ? "\nIsm: " + ism : "") + (tel ? "\nTelefon: " + tel : "");
+}
+function savatOch(){
+  $("#quti").className = "quti bir";
+  const chizS = () => {
+    $("#quti").innerHTML = `<div class="savat">
+      <div class="sarlavha"><h2 style="margin:0">Savat</h2><button class="yop" id="yop" aria-label="Yopish">×</button></div>
+      ${savat.length ? savat.map((x, i) => { const m = M.find(y => y.n === x.n); return `
+        <div class="savat-qator">
+          <img src="rasmlar/${m.rasm[0]}_k.jpg" alt="">
+          <div><div class="nomi">${esc(m.nom)}</div>
+            <div class="tur2">№${m.n}${x.olcham ? " · o'lcham: " + esc(x.olcham) : ""}</div>
+            <button class="ol" data-i="${i}">O'chirish</button></div>
+          <div class="soni"><button data-k="${i}" aria-label="Kamaytirish">−</button><span>${x.soni}</span><button data-p="${i}" aria-label="Ko'paytirish">+</button></div>
+        </div>`; }).join("") : `<div class="bosh-savat">Savat bo'sh</div>`}
+      ${savat.length ? `
+        <div class="kichik-matn">Narxlar sotuvchi bilan kelishiladi. Ism va telefon ixtiyoriy — sotuvchi siz bilan bog'lanishi uchun.</div>
+        <input class="maydon" id="ism" placeholder="Ismingiz (ixtiyoriy)" autocomplete="name">
+        <input class="maydon" id="tel" placeholder="Telefoningiz (ixtiyoriy)" inputmode="tel" autocomplete="tel">
+        ${TG ? "" : `<button class="btn tg" id="yubor" style="justify-content:center;padding:13px">Buyurtmani Telegramda yuborish</button>`}
+        <a class="btn" href="tel:${TEL}" style="justify-content:center;padding:12px">Qo'ng'iroq qilish: +998 91 154 41 81</a>
+        <div class="kichik-matn" id="yuborIzoh">Tugma bosilganda sotuvchi bilan Telegram chat ochiladi, buyurtma matni tayyor bo'ladi va nusxalanadi — kerak bo'lsa chatga joylang.</div>
+        <button class="ol" id="tozala" style="background:none;border:0;color:var(--xira);text-decoration:underline;cursor:pointer;align-self:flex-start">Savatni tozalash</button>` : ""}
+    </div>`;
+    $("#yop").onclick = yop;
+    document.querySelectorAll("[data-k]").forEach(b => b.onclick = () => { const x = savat[+b.dataset.k]; x.soni = Math.max(1, x.soni - 1); saqla(); chizS(); });
+    document.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { const x = savat[+b.dataset.p]; x.soni = Math.min(99, x.soni + 1); saqla(); chizS(); });
+    document.querySelectorAll(".savat-qator .ol").forEach(b => b.onclick = () => { savat.splice(+b.dataset.i, 1); saqla(); chizS(); });
+    const t = $("#tozala"); if(t) t.onclick = () => { savat = []; saqla(); chizS(); };
+    const y = $("#yubor"); if(y) y.onclick = yubor;
+  };
+  chizS();
+  ochiqQil("savat");
+}
+function yubor(){
+  if(!savat.length) return;
+  const matn = buyurtmaMatni();
+  try { navigator.clipboard.writeText(matn).catch(() => {}); } catch(e) {}
+  const url = `https://t.me/${SOTUVCHI}?text=${encodeURIComponent(matn)}`;
+  // Zaxira: matn Telegram'ga o'zi tushmasa, mijoz shu yerdan nusxalab oladi
+  const iz = $("#yuborIzoh");
+  if(iz) iz.innerHTML = `Chat ochildi. Agar xabar maydonida buyurtma matni bo'lmasa, quyidagini nusxalab yuboring:<textarea class="buyurtma-matn" readonly>${esc(matn)}</textarea>`;
+  if(TG) TG.openTelegramLink(url); else window.open(url, "_blank", "noopener");
+}
+function ochiqQil(qaysi){
+  oyna = qaysi;
+  $("#oyna").classList.add("ochiq");
+  document.body.style.overflow = "hidden";
+  if(TG) TG.BackButton.show();
+  savatBelgi();
+}
 function yop(){
-  $("#oyna").classList.remove("ochiq"); $("#quti").innerHTML = "";
+  $("#oyna").classList.remove("ochiq"); $("#quti").innerHTML = ""; oyna = null;
   document.body.style.overflow = ""; history.replaceState(null, "", location.pathname);
   if(TG) TG.BackButton.hide();
+  savatBelgi();
+}
+// Telegram ichida pastki katta tugma: savat bo'lsa — «Savat», savat ochiq bo'lsa — «Buyurtmani yuborish»
+function tgTugma(){
+  if(!TG) return;
+  const B = TG.MainButton;
+  if(oyna === "savat" && savat.length){ B.setText("Buyurtmani yuborish"); B.show(); }
+  else if(oyna !== "savat" && jami() > 0){ B.setText(`🛒 Savat · ${jami()} ta`); B.show(); }
+  else B.hide();
 }
 $("#turlar").onclick = e => { const b = e.target.closest(".tur"); if(!b) return; tur = b.dataset.t; turlarniChiz(); chiz(); };
 $("#qidir").oninput = e => { soz = e.target.value; chiz(); };
 $("#tor").onclick = e => { const k = e.target.closest(".karta"); if(k) och(+k.dataset.n); };
 $("#tor").onkeydown = e => { const k = e.target.closest(".karta"); if(k && e.key === "Enter") och(+k.dataset.n); };
 $("#oyna").onclick = e => { if(e.target.id === "oyna") yop(); };
+$("#savatTugma").onclick = savatOch;
+$("#yopUst").onclick = yop;
 document.addEventListener("keydown", e => { if(e.key === "Escape") yop(); });
-// Telegram ichida (mini app) ochilganda: to'liq balandlik, rang, «orqaga» tugmasi, t.me havolalari Telegram ichida
-const TG = (window.Telegram && Telegram.WebApp && Telegram.WebApp.initData) ? Telegram.WebApp : null;
+// Telegram ichida (mini app) ochilganda: to'liq balandlik, rang, «orqaga» va pastki tugma, t.me havolalari Telegram ichida
 if(TG){
   TG.ready(); TG.expand();
-  try { TG.setHeaderColor("#14170f"); TG.setBackgroundColor("#14170f"); } catch(e) {}
+  try { TG.setHeaderColor("#14170f"); TG.setBackgroundColor("#14170f"); TG.MainButton.setParams({color:"#b5c27a", text_color:"#1b1f12"}); } catch(e) {}
   TG.BackButton.onClick(yop);
+  TG.MainButton.onClick(() => { if(oyna === "savat") yubor(); else savatOch(); });
   document.addEventListener("click", e => {
     const a = e.target.closest('a[href^="https://t.me/"]');
     if(a){ e.preventDefault(); TG.openTelegramLink(a.href); }
   });
 }
-turlarniChiz(); chiz();
-const h =location.hash.match(/^#m(\d+)$/); if(h) och(+h[1]);
+turlarniChiz(); chiz(); savatBelgi();
+const h = location.hash.match(/^#m(\d+)$/); if(h) och(+h[1]);
 </script>
 </body>
 </html>
